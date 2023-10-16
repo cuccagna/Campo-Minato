@@ -1,0 +1,238 @@
+/* rgb(0,23,50)
+  rgb(241,117,78)
+  rgb(78,241,187)
+  rgb(216,238,232)
+  rgb(203,223,221)
+  rgb(157,197,199) */
+
+/* :root {
+  --game-panel-color: rgb(0, 23, 50);
+  --win-color: rgb(78, 241, 187);
+  --cell-color: rgb(216, 238, 232);
+  --cell-dark-color: rgb(203, 223, 221);
+  --cell-clicked-color: rgb(157, 197, 199);
+  --cell-bomb-game-over-color: rgb(241, 117, 78);
+  --main-font: "Darker Grotesque", "sans-serif";
+  --end-game-font: "Press Start 2P", cursive;
+} */
+
+:root {
+  --game-panel-color: #5545bf;
+  --win-color: rgb(78, 241, 187);
+  --cell-color: #f2e5a2;
+  --cell-dark-color: #f2de79;
+  --cell-clicked-color: #c3b324;
+  --cell-bomb-game-over-color: rgb(241, 117, 78);
+  --main-font: "VT323", "handwriting", "serif";
+  --end-game-font: "Bungee Spice", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 16px;
+  color: var(--game-panel-color);
+  background-color: var(--cell-color);
+  font-family: var(--main-font);
+}
+
+/* Customizza la select */
+.theme-choise-container {
+  display: flex;
+  align-items: center;
+}
+
+.custom-select {
+  margin-left: 10px;
+  position: relative;
+  font-family: Arial;
+  width: 200px;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: var(--game-panel-color);
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: var(--game-panel-color);
+  filter: saturate(10);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+div.game-container {
+  width: 484px;
+  /* position: relative; */
+
+  /* border: 1px dashed black; */
+}
+
+/* div.game-board-img {
+  height: inherit;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  background-image: url("./assets/img/coyote_bip_bip2.jpg");
+} */
+
+/* Pannello di gioco */
+h1 {
+  font-size: 40px;
+}
+
+.score {
+  font-size: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Tabellone di gioco */
+
+.game-board {
+  border: 2px solid var(--game-panel-color);
+  /*  position: relative;
+  z-index: 1; */
+  position: relative;
+}
+.game-board-background {
+  mix-blend-mode: multiply;
+
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: inherit;
+  z-index: 100;
+  /*Usa opacity per un'immagine meno invasiva
+   opacity: 0.15; */
+}
+
+.grid {
+  position: relative;
+  height: 480px;
+  width: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.cell {
+  width: 48px;
+  height: 48px;
+  border: 1px dashed black;
+  cursor: pointer;
+  background-color: var(--cell-color);
+}
+
+.cell-dark {
+  background-color: var(--cell-dark-color);
+}
+
+/* Schermata di fine gioco */
+
+.end-game-screen {
+  position: absolute;
+  background-image: radial-gradient(
+    var(--cell-color),
+    var(--cell-bomb-game-over-color)
+  );
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 200;
+}
+
+.end-game-text {
+  font-family: var(--end-game-font);
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+button {
+  border: 2px solid var(--game-panel-color);
+  font-size: 24px;
+  font-family: --main-font;
+  text-transform: uppercase;
+  padding: 4px 20px 8px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--cell-dark-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Classe da aggiungere tramite js a .end-gam-screen */
+.win {
+  background-color: var(--win-color);
+}
+
+.cell-clicked {
+  background-color: var(--cell-clicked-color);
+}
+
+.cell-bomb {
+  background-color: var(--cell-bomb-game-over-color);
+  background-image: url("./assets/img/bomba-default.png");
+  background-image: url("./assets/img/icons8-bomba-48.png");
+}
