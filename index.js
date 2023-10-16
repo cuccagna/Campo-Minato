@@ -1,6 +1,8 @@
 const root = document.documentElement;
 const IMG_PATH = "./assets/img/";
 const imgTag = document.querySelector(".game-board-background");
+const gameBoard = document.querySelector(".game-board");
+const gameOver = document.querySelector(".end-game-screen");
 
 temi = [
   {
@@ -141,3 +143,10 @@ customItemsSelectContainer.addEventListener("click", function (e) {
     }
   }
 });
+
+gameBoard.addEventListener("click", toggleCopertinaGameOver);
+
+function toggleCopertinaGameOver() {
+  console.log("Ciao");
+  gameOver.classList.toggle("hidden");
+}
